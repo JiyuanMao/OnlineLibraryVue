@@ -42,7 +42,11 @@
         </b-form>
     </div>
 </template>
-
+<style>
+    template {
+        background: url("../asserts/homebackground2.jpg") no-repeat center top;
+    }
+</style>
 <script>
 export default {
   name: 'Login',

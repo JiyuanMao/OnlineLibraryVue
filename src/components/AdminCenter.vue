@@ -57,7 +57,7 @@
 </template>
 <style>
     template {
-        background: url("../asserts/pagebackground.jpg") no-repeat center top;
+        background: url("../asserts/homebackground.jpg") no-repeat center top;
     }
 </style>
 <script>

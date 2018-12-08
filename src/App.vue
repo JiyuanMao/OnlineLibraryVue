@@ -10,8 +10,8 @@
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item to="/Admin">Admin</b-nav-item>
-                    <b-nav-item to="/Login" v-if="!is_login">Login/Register</b-nav-item>
-                    <b-nav-item @click.stop="logout" v-if="is_login">Logout</b-nav-item>
+                    <b-nav-item to="/Login">Login</b-nav-item>
+                    <b-nav-item href="#">Register</b-nav-item>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
@@ -22,18 +22,7 @@
 
 <script>
 export default {
-  name: 'App',
-  data () {
-    return {
-      is_login: localStorage.getItem('user')
-    }
-  },
-  methods: {
-    logout () {
-      localStorage.clear()
-      location.reload()
-    }
-  }
+  name: 'App'
 }
 </script>
 
@@ -51,8 +40,7 @@ export default {
     / / background-color: #f6d54f;
         min-height: 100%;
         min-width: 100%;
-        position: absolute;
-        overflow-y: scroll;
+        position: fixed;
     }
 
 </style>
