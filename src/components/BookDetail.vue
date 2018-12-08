@@ -6,24 +6,20 @@
             </h4>
             <b-card-body>
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                    {{book.publisher}}
                 </p>
             </b-card-body>
-            <b-list-group flush>
-                <b-list-group-item>Cras justo odio</b-list-group-item>
-                <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-                <b-list-group-item>Vestibulum at eros</b-list-group-item>
-            </b-list-group>
             <b-card-body>
-                <a href="#"
-                   class="card-link">Card link</a>
-                <a href="#"
-                   class="card-link">Another link</a>
+                <a class="card-link">I like it.</a>
+                <a :href="book.link"
+                   class="card-link">Book link</a>
             </b-card-body>
-            <b-card-footer>This is a footer</b-card-footer>
-            <b-card-img src="https://placekitten.com/480/210"
-                        alt="Image"
-                        bottom></b-card-img>
+            <b-card-footer>Comments:</b-card-footer>
+            <b-list-group flush>
+                <b-list-group-item v-for="comment in comments">
+                    {{comment.username}} says: {{comment.text}}
+                </b-list-group-item>
+            </b-list-group>
         </b-card>
     </div>
 </template>
@@ -41,6 +37,10 @@ export default {
     }
   },
   created () {
+    if (localStorage.getItem('user') === null) {
+      alert('login first!')
+      this.$router.push('/')
+    }
     console.log(this.$route.params.id)
     this.getBookDetail(this.$route.params.name)
     this.getBookComments(this.$route.params.name)
@@ -57,6 +57,9 @@ export default {
         .then(response => {
           this.comments = response.data
         })
+    },
+    doComments () {
+
     }
   }
 

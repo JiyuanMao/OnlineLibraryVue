@@ -1,31 +1,31 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <b-form-group horizontal label="Filter:" class="col-9" style="margin: auto">
-        <b-input-group>
-          <b-form-input v-model="query_str" placeholder="Type to Search"/>
-          <b-input-group-append>
-            <b-btn :disabled="!query_str" @click="query_str = ''">Clear</b-btn>
-          </b-input-group-append>
-        </b-input-group>
-      </b-form-group>
+    <div class="container">
+        <div class="row">
+            <b-form-group horizontal label="Filter:" class="col-9" style="margin: auto">
+                <b-input-group>
+                    <b-form-input v-model="query_str" placeholder="Type to Search"/>
+                    <b-input-group-append>
+                        <b-btn :disabled="!query_str" @click="query_str = ''">Clear</b-btn>
+                    </b-input-group-append>
+                </b-input-group>
+            </b-form-group>
+        </div>
+        <b-table style="width: 90%;margin: auto" striped hover :items="books" :fields="fields"
+                 :filter="query_str" caption-top>
+            <template slot="table-caption">
+                Books
+            </template>
+
+            <template slot="operation" slot-scope="data">
+
+                <b-button variant="info" size="sm" class="mr-2" :to="'/Detail/'+data.item.name">
+                    See Detail
+                </b-button>
+
+            </template>
+
+        </b-table>
     </div>
-    <b-table style="width: 90%;margin: auto" striped hover :items="books" :fields="fields"
-             :filter="query_str" caption-top>
-      <template slot="table-caption">
-        Books
-      </template>
-
-      <template slot="operation" slot-scope="data">
-
-        <b-button variant="info" size="sm" class="mr-2" :to="'/Detail/'+data.item.name">
-          See Detail
-        </b-button>
-
-      </template>
-
-    </b-table>
-  </div>
 </template>
 <script>
 import BookService from '@/services/BookService'
@@ -56,7 +56,6 @@ export default {
     }
   },
   created () {
-    console.log('aaaaaaaaa')
     this.getBooks()
   },
   methods: {

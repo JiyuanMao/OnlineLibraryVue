@@ -13,7 +13,7 @@
             </template>
 
             <template slot="operation" slot-scope="data">
-                <b-button variant="info" size="sm" class="mr-2">
+                <b-button variant="info" size="sm" @click.stop="updateBook(data.item)" class="mr-2">
                     Modify
                 </b-button>
                 <b-button variant="danger" size="sm" @click.stop="deleteBooks(data.item.name,data.item._id)"
@@ -24,7 +24,7 @@
 
         </b-table>
 
-        <!--modal-->
+        <!--add modal-->
         <b-modal id="modal" title="Add a new book" @ok="handleSubmit" centered>
             <form @submit.stop.prevent="handleSubmit">
                 <b-row>
@@ -53,6 +53,46 @@
                 </b-row>
             </form>
         </b-modal>
+
+        <!--update modal-->
+        <b-modal v-model="show_updates" title="Edit book info" @ok="handleUpdateSubmit" centered>
+            <form @submit.stop.prevent="handleUpdateSubmit">
+                <b-row>
+                    <b-col sm="2"><label>Name:</label></b-col>
+                    <b-col sm="10">
+                        <b-form-input type="text" placeholder="Enter name" v-model="update_book.name"></b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row style="margin-top: 30px;">
+                    <b-col sm="2"><label>Author:</label></b-col>
+                    <b-col sm="10">
+                        <b-form-input type="text" placeholder="Enter author"
+                                      v-model="update_book.author"></b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row style="margin-top: 30px;">
+                    <b-col sm="2"><label>Publisher:</label></b-col>
+                    <b-col sm="10">
+                        <b-form-input type="text" placeholder="Enter publisher"
+                                      v-model="update_book.publisher"></b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row style="margin-top: 30px;">
+                    <b-col sm="2"><label>Category:</label></b-col>
+                    <b-col sm="10">
+                        <b-form-input type="text" placeholder="Enter category"
+                                      v-model="update_book.category"></b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row style="margin-top: 30px;">
+                    <b-col sm="2"><label>Likes:</label></b-col>
+                    <b-col sm="10">
+                        <b-form-input type="number" placeholder="Enter category"
+                                      v-model="update_book.likes"></b-form-input>
+                    </b-col>
+                </b-row>
+            </form>
+        </b-modal>
     </div>
 </template>
 <style>
@@ -68,7 +108,23 @@ export default {
   data () {
     return {
       books: [],
-      fields: ['name', 'author', 'publisher', 'category', 'likes', 'operation'],
+      fields: [
+        {
+          key: 'name',
+          sortable: true
+        }, {
+          key: 'author',
+          sortable: true
+        }, {
+          key: 'publisher',
+          sortable: true
+        }, {
+          key: 'category',
+          sortable: true
+        }, {
+          key: 'likes',
+          sortable: true
+        }, 'operation'],
       show_books: [],
       book: {
         'name': '',
@@ -76,10 +132,28 @@ export default {
         'publisher': '',
         'category': ''
       },
-      query_str: ''
+      update_book: {
+        'id': '',
+        'name': '',
+        'author': '',
+        'publisher': '',
+        'category': '',
+        'likes': ''
+      },
+      query_str: '',
+      show_updates: false
     }
   },
   created () {
+    let user = localStorage.getItem('user')
+    if (user === null) {
+      alert('Login first!')
+      this.$router.push('/')
+    }
+    if (user.usertype !== 'admin') {
+      alert('You are not admin!')
+      this.$router.push('/')
+    }
     this.getBooks()
   },
   methods: {
@@ -88,7 +162,26 @@ export default {
       BookService.addBook(this.book)
         .then(response => {
           console.log(response)
-          alert(response.data)
+          alert(response.data.message)
+          this.getBooks()
+        })
+    },
+    updateBook (book) {
+      this.update_book.id = book._id
+      this.update_book.name = book.name
+      this.update_book.author = book.author
+      this.update_book.publisher = book.pubisher
+      this.update_book.category = book.category
+      this.update_book.likes = book.likes
+      console.log(book)
+      this.show_updates = true
+    },
+    handleUpdateSubmit () {
+      console.log(this.update_book)
+      BookService.updateBook(this.update_book)
+        .then(response => {
+          console.log(response)
+          alert(response.data.message)
           this.getBooks()
         })
     },
