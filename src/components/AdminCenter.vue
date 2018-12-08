@@ -1,10 +1,30 @@
 <template>
     <div class="container">
-        <div>
-            <b-button v-b-modal.modal variant="success" class="offset-10">Add a new book</b-button>
+        <div class="row">
+            <b-form-input class="offset-1 col-7" id="inputLive" v-model="query_str" type="text"
+                          placeholder="Enter to filter books"></b-form-input>
+            <b-button v-b-modal.modal variant="success" class="offset-1">Add a new book</b-button>
         </div>
         <br>
-        <b-table style="width: 90%;margin: auto" striped hover :items="books" :fields="fields"></b-table>
+        <b-table style="width: 90%;margin: auto" striped hover :items="books" :fields="fields"
+                 :filter="query_str" caption-top>
+            <template slot="table-caption">
+                Books
+            </template>
+
+            <template slot="operation" slot-scope="data">
+                <b-button variant="info" size="sm" class="mr-2">
+                    Modify
+                </b-button>
+                <b-button variant="danger" size="sm" @click.stop="deleteBooks(data.item.name,data.item._id)"
+                          class="mr-2">
+                    Delete
+                </b-button>
+            </template>
+
+        </b-table>
+
+        <!--modal-->
         <b-modal id="modal" title="Add a new book" @ok="handleSubmit" centered>
             <form @submit.stop.prevent="handleSubmit">
                 <b-row>
@@ -35,7 +55,11 @@
         </b-modal>
     </div>
 </template>
-
+<style>
+    template {
+        background: url("../asserts/pagebackground.jpg") no-repeat center top;
+    }
+</style>
 <script>
 import BookService from '@/services/BookService'
 
@@ -44,17 +68,18 @@ export default {
   data () {
     return {
       books: [],
-      fields: ['name', 'author', 'publisher', 'category', 'likes', 'Operation'],
+      fields: ['name', 'author', 'publisher', 'category', 'likes', 'operation'],
+      show_books: [],
       book: {
         'name': '',
         'author': '',
         'publisher': '',
         'category': ''
-      }
+      },
+      query_str: ''
     }
   },
   created () {
-    console.log('aaaaaaaaa')
     this.getBooks()
   },
   methods: {
@@ -62,12 +87,10 @@ export default {
       console.log(this.book)
       BookService.addBook(this.book)
         .then(response => {
-          alert(response.message)
+          console.log(response)
+          alert(response.data)
           this.getBooks()
         })
-      //     .error(ret => {
-      //         // alert("G")
-      //     })
     },
     getBooks: function () {
       BookService.getBooks()
@@ -75,6 +98,17 @@ export default {
           console.log(response)
           this.books = response.data
         })
+    },
+    deleteBooks: function (name, id) {
+      let ret = confirm('Are you sure to delete ' + name)
+      if (ret) {
+        BookService.deleteBook(id)
+          .then(response => {
+            console.log(response)
+            alert(response.message)
+            this.getBooks()
+          })
+      }
     }
   }
 }

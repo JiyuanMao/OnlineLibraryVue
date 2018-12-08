@@ -6,5 +6,8 @@ export default {
   },
   addBook (book) {
     return Api().post('/books/', book)
+  },
+  deleteBook (id) {
+    return Api().delete('/books/' + id)
   }
 }
