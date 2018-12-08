@@ -4,22 +4,15 @@
             <b-tabs card>
                 <b-tab title="Login" active>
                     <b-form @submit="onLogin" @reset="onReset" v-if="show">
-                        <b-form-group id="exampleInputGroup1"
-                                      label="Username:"
-                                      label-for="exampleInput1"
-                                      description="The username used to login.">
-                            <b-form-input id="exampleInput1"
-                                          type="text"
+                        <b-form-group label="Username:" description="The username used to login.">
+                            <b-form-input type="text"
                                           v-model="form.username"
                                           required
                                           placeholder="Enter username">
                             </b-form-input>
                         </b-form-group>
-                        <b-form-group id="exampleInputGroup2"
-                                      label="Your password"
-                                      label-for="exampleInput2">
-                            <b-form-input id="exampleInput2"
-                                          type="password"
+                        <b-form-group label="Your password">
+                            <b-form-input type="password"
                                           v-model="form.password"
                                           required
                                           placeholder="Enter password">
@@ -33,20 +26,16 @@
                     <b-form @submit="onRegister" @reset="onReset" v-if="show">
                         <b-form-group id="exampleInputGroup1"
                                       label="Username:"
-                                      label-for="exampleInput1"
                                       description="The username used to login.">
-                            <b-form-input id="exampleInput1"
-                                          type="text"
-                                          v-model="form.username"
-                                          required
-                                          placeholder="Enter username">
+                            <b-form-input
+                                    type="text"
+                                    v-model="form.username"
+                                    required
+                                    placeholder="Enter username">
                             </b-form-input>
                         </b-form-group>
-                        <b-form-group id="exampleInputGroup2"
-                                      label="Your password"
-                                      label-for="exampleInput2">
-                            <b-form-input id="exampleInput2"
-                                          type="password"
+                        <b-form-group label="Your password">
+                            <b-form-input type="password"
                                           v-model="form.password"
                                           required
                                           placeholder="Enter password">
@@ -63,6 +52,8 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService'
+
 export default {
   name: 'Login',
   data () {
@@ -77,7 +68,13 @@ export default {
   methods: {
     onLogin (evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      UserService.userLogin(this.form)
+        .then(response => {
+          console.log(response)
+          localStorage.setItem('user', JSON.stringify(response.data[0]))
+          alert('Login Success!')
+          this.$router.push('/AllBooks')
+        })
     },
     onReset (evt) {
       evt.preventDefault()
@@ -90,7 +87,10 @@ export default {
     },
     onRegister (evt) {
       evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      UserService.userRegister(this.form)
+        .then(response => {
+          alert(response.data.message)
+        })
     }
   }
 }

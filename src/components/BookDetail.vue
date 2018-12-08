@@ -1,27 +1,34 @@
 <template>
-    <div>
-        <b-card no-body style="width: 60%;margin: auto">
-            <h4 slot="header">Book Name: {{book.name}}
-                <small>(Author: {{book.author}})</small>
-            </h4>
-            <b-card-body>
-                <p class="card-text">
-                    {{book.publisher}}
-                </p>
-            </b-card-body>
-            <b-card-body>
-                <a class="card-link">I like it.</a>
-                <a :href="book.link"
-                   class="card-link">Book link</a>
-            </b-card-body>
-            <b-card-footer>Comments:</b-card-footer>
-            <b-list-group flush>
-                <b-list-group-item v-for="comment in comments">
-                    {{comment.username}} says: {{comment.text}}
-                </b-list-group-item>
-            </b-list-group>
-        </b-card>
-    </div>
+  <div>
+    <b-card no-body style="width: 60%;margin: auto">
+      <h4 slot="header">Book Name: {{book.name}}
+        <small>(Author: {{book.author}})</small>
+      </h4>
+      <b-card-body>
+        <p class="card-text">
+          Publisher: {{book.publisher}}
+        </p>
+        <p class="card-text">
+          Category: {{book.category}}
+        </p>
+      </b-card-body>
+      <b-card-body>
+        <p>Likes :{{book.likes}}</p>
+        <b-button variant='outline-default' @click.stop="doLike" class="card-link">I like it.</b-button>
+        <a :href="book.link"
+           class="card-link">Book link</a>
+      </b-card-body>
+      <b-card-footer>Comments:</b-card-footer>
+      <b-list-group flush>
+        <b-list-group-item v-for="comment in comments">
+          {{comment.username}} says: {{comment.text}}
+        </b-list-group-item>
+      </b-list-group>
+      <b-button style="float: right" @click.stop="doComments()"> I want comment.</b-button>
+    </b-card>
+    <br>
+    <br>
+  </div>
 </template>
 
 <script>

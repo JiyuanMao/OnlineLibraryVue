@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import AllBooks from '@/components/AllBooks'
 import Admin from '@/components/AdminCenter'
 import Login from '@/components/Login'
-// import Detail from '@/components/BookDetail'
+import Detail from '@/components/BookDetail'
 
 Vue.use(Router)
 
@@ -29,5 +29,10 @@ export default new Router({
       path: '/Admin',
       name: 'Admin',
       component: Admin
+    },
+    {
+      path: '/Detail/:name',
+      name: 'Detail',
+      component: Detail
     }]
 })
