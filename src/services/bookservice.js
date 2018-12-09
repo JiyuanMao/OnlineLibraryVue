@@ -9,5 +9,8 @@ export default {
   },
   deleteBook (id) {
     return Api().delete('/books/' + id)
+  },
+  getBookInfo(bookname) {
+    return Api().get('/books/bname/' + bookname)
   }
 }
