@@ -199,7 +199,7 @@ export default {
         BookService.deleteBook(id)
           .then(response => {
             console.log(response)
-            alert(response.message)
+            alert(response.data.message);
             this.getBooks()
           })
       }
