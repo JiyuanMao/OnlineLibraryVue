@@ -52,7 +52,8 @@ export default {
           key: 'likes',
           sortable: true
         }, 'operation'],
-      query_str: ''
+      query_str: '',
+      is_login: localStorage.getItem('user')
     }
   },
   created () {

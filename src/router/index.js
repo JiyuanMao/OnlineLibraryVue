@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import AllBooks from '@/components/AllBooks'
-import Admin from '@/components/AdminCenter'
 import Login from '@/components/Login'
+import Admin from '@/components/AdminCenter'
 import Detail from '@/components/BookDetail'
 
 Vue.use(Router)
@@ -34,5 +34,6 @@ export default new Router({
       path: '/Detail/:name',
       name: 'Detail',
       component: Detail
-    }]
+    }
+  ]
 })

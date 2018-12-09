@@ -6,24 +6,28 @@
             </h4>
             <b-card-body>
                 <p class="card-text">
-                    Publisher:   {{book.publisher}}
+                    Publisher: {{book.publisher}}
                 </p>
                 <p class="card-text">
-                    Category:   {{book.category}}
+                    Category: {{book.category}}
                 </p>
             </b-card-body>
             <b-card-body>
-                <a class="card-link">I like it.</a>
+                <p>Likes :{{book.likes}}</p>
+                <b-button variant='outline-default' @click.stop="doLike" class="card-link">I like it.</b-button>
                 <a :href="book.link"
                    class="card-link">Book link</a>
             </b-card-body>
             <b-card-footer>Comments:</b-card-footer>
             <b-list-group flush>
-                <b-list-group-item v-for="comment in comments">
+                <b-list-group-item v-for="comment in comments" :key="comment.text">
                     {{comment.username}} says: {{comment.text}}
                 </b-list-group-item>
             </b-list-group>
+            <b-button style="float: right" @click.stop="doComments()"> I want comment.</b-button>
         </b-card>
+        <br>
+        <br>
     </div>
 </template>
 
@@ -36,7 +40,8 @@ export default {
   data () {
     return {
       book: {},
-      comments: []
+      comments: [],
+      is_login: localStorage.getItem('user')
     }
   },
   created () {
@@ -62,7 +67,26 @@ export default {
         })
     },
     doComments () {
-
+      let comment = {}
+      comment.text = prompt('Input your comment:')
+      if (comment.text.length === 0) {
+        alert('Nothing input!')
+        return
+      }
+      comment.username = JSON.parse(localStorage.getItem('user')).username
+      comment.bookname = this.book.name
+      let that = this
+      CommentService.newComment(comment).then(response => {
+        alert('Add comments success!')
+        that.getBookComments(comment.bookname)
+      })
+    },
+    doLike () {
+      this.book.likes++
+      this.book.id = this.book._id
+      BookService.updateBook(this.book)
+        .then(response => {
+        })
     }
   }
 

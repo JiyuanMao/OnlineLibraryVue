@@ -10,7 +10,10 @@ export default {
   deleteBook (id) {
     return Api().delete('/books/' + id)
   },
-  getBookInfo(bookname) {
+  updateBook (book) {
+    return Api().put('/books/' + book.id, book)
+  },
+  getBookInfo (bookname) {
     return Api().get('/books/bname/' + bookname)
   }
 }

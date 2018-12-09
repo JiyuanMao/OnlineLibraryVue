@@ -141,11 +141,12 @@ export default {
         'likes': ''
       },
       query_str: '',
-      show_updates: false
+      show_updates: false,
+      is_login: localStorage.getItem('user')
     }
   },
   created () {
-    let user = localStorage.getItem('user')
+    let user = JSON.parse(localStorage.getItem('user'));
     if (user === null) {
       alert('Login first!')
       this.$router.push('/')
@@ -170,7 +171,7 @@ export default {
       this.update_book.id = book._id
       this.update_book.name = book.name
       this.update_book.author = book.author
-      this.update_book.publisher = book.pubisher
+      this.update_book.publisher = book.publisher
       this.update_book.category = book.category
       this.update_book.likes = book.likes
       console.log(book)
