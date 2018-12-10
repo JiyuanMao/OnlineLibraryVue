@@ -10,4 +10,4 @@ before_script:
 - npm run custom-build
 - cd dist && httpserver -p 8080 &
 script:
-npm run cypress
+npx cypress run
