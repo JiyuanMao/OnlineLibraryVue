@@ -1,0 +1,13 @@
+dist: trusty
+language: node_js
+node_js:
+- "8"
+chche:
+  directories:
+  -~/.cache
+before_script:
+- npm install -g httpserver
+- npm run custom-build
+- cd dist && httpserver -p 8080 &
+script:
+npm run cypress
