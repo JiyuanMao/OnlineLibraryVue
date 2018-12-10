@@ -15,11 +15,11 @@ describe('The Admin Page Test', function () {
   });
 
   it('Go Admin Page', () => {
-    cy.wait(5000);
+    cy.wait(2000);
     cy.get("a[href=\"#/Admin\"]").click();
-    cy.wait(10000);
+    cy.wait(1000);
     cy.location('href').should('include', 'Admin')
-  })
+  });
 
   it('Test Add Books', () => {
     cy.get(".btn-success").click();
@@ -35,6 +35,16 @@ describe('The Admin Page Test', function () {
 
   it("Check add results", () => {
     cy.get("td[aria-colindex=1]").contains("New book name**********************")
+  });
+
+  it("Test filter function", () => {
+    cy.get("input[placeholder=\"Enter to filter books\"]").type("New book name**********************");
+    cy.wait(500);
+    cy.get("td[aria-colindex=1]").contains("New book name**********************");
+    cy.get("input[placeholder=\"Enter to filter books\"]").type("{selectall}{backspace}").type("New book name#############",);
+    cy.wait(500);
+    cy.get("td[aria-colindex=1]").should('not.exist');
+    cy.get("input[placeholder=\"Enter to filter books\"]").type("{selectall}{backspace}");
   });
 
   it("Click to  modify results", () => {
