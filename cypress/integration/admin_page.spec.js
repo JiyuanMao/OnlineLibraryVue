@@ -17,13 +17,13 @@ describe('The Admin Page Test', function () {
   it('Go Admin Page', () => {
     cy.wait(2000)
     cy.get('a[href="#/Admin"]').click()
-    cy.wait(1000)
+    cy.wait(50000)
     cy.location('href').should('include', 'Admin')
   })
 
   it('Test Add Books', () => {
     cy.get('.btn-success').click()
-    cy.wait(100)
+    cy.wait(1000)
     cy.get('input[placeholder="Enter name"]:visible').type('New book name**********************')
     cy.get('input[placeholder="Enter author"]:visible').type('New book author')
     cy.get('input[placeholder="Enter publisher"]:visible').type('New book publisher')
