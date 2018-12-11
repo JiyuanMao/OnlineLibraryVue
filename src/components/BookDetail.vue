@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import BookService from '@/services/BookService'
-import CommentService from '@/services/CommentService'
+import BookService from '@/services/bookservice'
+import CommentService from '@/services/commentservice'
 
 export default {
   name: 'BookDetail',

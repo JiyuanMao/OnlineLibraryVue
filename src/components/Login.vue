@@ -50,50 +50,50 @@
 </template>
 
 <script>
-    import UserService from '@/services/UserService'
+import UserService from '@/services/userservice'
 
-    export default {
-        name: 'Login',
-        data() {
-            return {
-                form: {
-                    username: '',
-                    password: ''
-                },
-                show: true,
-                is_login: localStorage.getItem('user')
-            }
-        },
-        methods: {
-            onLogin(evt) {
-                evt.preventDefault()
-                UserService.userLogin(this.form)
-                    .then(response => {
-                        console.log(response)
-                        localStorage.setItem('user', JSON.stringify(response.data[0]))
-                        alert('Login Success!')
-                        location.reload()
-                        this.$router.push('/AllBooks')
-                    })
-            },
-            onReset(evt) {
-                evt.preventDefault()
-                /* Reset our form values */
-                this.form.username = ''
-                this.form.password = ''
-                this.$nextTick(() => {
-                    this.show = true
-                })
-            },
-            onRegister(evt) {
-                evt.preventDefault()
-                UserService.userRegister(this.form)
-                    .then(response => {
-                        alert(response.data.message + ', you can login now.')
-                    })
-            }
-        }
+export default {
+  name: 'Login',
+  data () {
+    return {
+      form: {
+        username: '',
+        password: ''
+      },
+      show: true,
+      is_login: localStorage.getItem('user')
     }
+  },
+  methods: {
+    onLogin (evt) {
+      evt.preventDefault()
+      UserService.userLogin(this.form)
+        .then(response => {
+          console.log(response)
+          localStorage.setItem('user', JSON.stringify(response.data[0]))
+          alert('Login Success!')
+          location.reload()
+          this.$router.push('/AllBooks')
+        })
+    },
+    onReset (evt) {
+      evt.preventDefault()
+      /* Reset our form values */
+      this.form.username = ''
+      this.form.password = ''
+      this.$nextTick(() => {
+        this.show = true
+      })
+    },
+    onRegister (evt) {
+      evt.preventDefault()
+      UserService.userRegister(this.form)
+        .then(response => {
+          alert(response.data.message + ', you can login now.')
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

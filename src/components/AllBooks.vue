@@ -28,7 +28,7 @@
     </div>
 </template>
 <script>
-import BookService from '@/services/BookService'
+import BookService from '@/services/bookservice'
 
 export default {
   name: 'AllBooks',
