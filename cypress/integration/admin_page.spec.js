@@ -17,7 +17,7 @@ describe('The Admin Page Test', function () {
   it('Go Admin Page', () => {
     cy.wait(2000)
     cy.get('a[href="#/Admin"]').click()
-    cy.wait(50000)
+    cy.wait(5000)
     cy.location('href').should('include', 'Admin')
   })
 

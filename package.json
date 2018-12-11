@@ -14,7 +14,7 @@
     "build": "node build/build.js",
     "cypress": "cypress run",
     "cypress-gui": "cypress open",
-    "custom-build": "npx webpack --config build/webpack.custom.prod.config.js"
+    "custom-build": "npm webpack --config build/webpack.custom.prod.config.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
