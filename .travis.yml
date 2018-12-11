@@ -10,3 +10,10 @@ before_script:
 - npm run dev &
 script:
 - npm run cypress
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: onlinelibrary.surge.sh
+  project: ./dist
+  on:
+    branch: master
