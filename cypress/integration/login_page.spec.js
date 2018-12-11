@@ -37,8 +37,4 @@ describe('The Login and Register Page Test', function () {
     cy.get('button[type=submit]:visible').click()
   })
 
-  it('check is login success', () => {
-    cy.location('href').should('not.include', 'login')
-    cy.location('href').should('include', 'AllBooks')
-  })
 })

@@ -77,7 +77,6 @@ describe('The Admin Page Test', function () {
 
   it('Test Add Books', () => {
     cy.get('.btn-success').click()
-    cy.server()
     cy.route({
       method: 'GET',
       url: '/books',
