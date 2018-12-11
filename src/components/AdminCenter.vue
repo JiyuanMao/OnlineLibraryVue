@@ -146,7 +146,7 @@ export default {
     }
   },
   created () {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('user'))
     if (user === null) {
       alert('Login first!')
       this.$router.push('/')
@@ -199,7 +199,7 @@ export default {
         BookService.deleteBook(id)
           .then(response => {
             console.log(response)
-            alert(response.data.message);
+            alert(response.data.message)
             this.getBooks()
           })
       }
