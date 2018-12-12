@@ -24,6 +24,7 @@ module.exports = {
                 changeOrigin: true
             },
         },*/
+        proxyTable: {},
 
         // Various Dev Server settings
         host: 'localhost', // can be overwritten by process.env.HOST
