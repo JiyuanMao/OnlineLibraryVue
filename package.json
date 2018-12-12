@@ -11,7 +11,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --fix --ext.js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js",
+    "build": "react-scripts build && cp build/index.html build/200.html",
     "cypress": "cypress run",
     "cypress-gui": "cypress open",
     "custom-build": "npm webpack --config build/webpack.custom.prod.config.js"
