@@ -10,21 +10,21 @@ module.exports = {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        /*proxyTable: {
+        proxyTable: {
             '/users': {
-                target: 'http://127.0.0.1:3000',
+                target: 'https://onlinelibrarytest.herokuapp.com',
                 changeOrigin: true
             },
             '/books': {
-                target: 'http://127.0.0.1:3000',
+                target: 'https://onlinelibrarytest.herokuapp.com',
                 changeOrigin: true
             },
             '/comments': {
-                target: 'http://127.0.0.1:3000',
+                target: 'https://onlinelibrarytest.herokuapp.com',
                 changeOrigin: true
             },
-        },*/
-        proxyTable: {},
+        },
+
 
         // Various Dev Server settings
         host: 'localhost', // can be overwritten by process.env.HOST

@@ -6,6 +6,7 @@
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
                     <b-nav-item to="/AllBooks">AllBooks</b-nav-item>
+                    <b-nav-item to="/AllComments">AllComments</b-nav-item>
                     <!--<b-nav-item href="#" disabled>Disabled</b-nav-item>-->
                 </b-navbar-nav>
                 <b-navbar-nav class="ml-auto">
@@ -50,7 +51,7 @@ export default {
         color: #000000;
     / / color: #2c3e50;
         padding-top: 20px;
-        background: url("./asserts/pagebackground.jpg") no-repeat center top;
+        background: url("./asserts/homebackground.jpg");
     / / background-size: cover;
     / / background-color: #f6d54f;
         min-height: 100%;

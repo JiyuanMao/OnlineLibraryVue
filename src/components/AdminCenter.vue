@@ -149,11 +149,11 @@ export default {
     let user = JSON.parse(localStorage.getItem('user'))
     if (user === null) {
       alert('Login first!')
-      this.$router.push('/')
+      this.$router.push('/Login')
     }
     if (user.usertype !== 'admin') {
       alert('You are not admin!')
-      this.$router.push('/')
+      this.$router.push('/Admin')
     }
     this.getBooks()
   },

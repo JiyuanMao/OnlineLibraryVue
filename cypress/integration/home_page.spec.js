@@ -5,7 +5,7 @@ describe('The Home Page Test', function () {
 
   it('home page h1 text', () => {
     cy.get('.display-3')
-      .should('have.text', 'My Online Librar')
+      .should('have.text', 'My Online Library')
   });
 
   it('nav online library link', () => {

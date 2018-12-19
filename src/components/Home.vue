@@ -1,5 +1,5 @@
 <template>
-    <b-jumbotron header="My Online Librar" lead="There are lots of books now." class="container">
+    <b-jumbotron header="My Online Library" lead="There are lots of books now." class="container">
         <p>For more information visit website</p>
         <router-link to="/AllBooks">
             <b-btn name="homeBtn" variant="primary" href="/AllBooks">Start your travel</b-btn>
@@ -8,4 +8,8 @@
 </template>
 
 <style>
+    #app {
+        position: absolute;
+        overflow-y: scroll;
+    }
 </style>

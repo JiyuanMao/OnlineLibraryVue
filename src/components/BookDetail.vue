@@ -47,7 +47,7 @@ export default {
   created () {
     if (localStorage.getItem('user') === null) {
       alert('login first!')
-      this.$router.push('/')
+      this.$router.push('/Login')
     }
     console.log(this.$route.params.id)
     this.getBookDetail(this.$route.params.name)

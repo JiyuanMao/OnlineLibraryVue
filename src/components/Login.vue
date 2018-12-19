@@ -74,7 +74,7 @@ export default {
           localStorage.setItem('user', JSON.stringify(response.data[0]))
           alert('Login Success!')
           location.reload()
-          this.$router.push('/AllBooks')
+          this.$router.push('/')
         })
     },
     onReset (evt) {
