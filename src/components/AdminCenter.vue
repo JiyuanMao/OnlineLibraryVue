@@ -151,15 +151,32 @@ export default {
       alert('Login first!')
       this.$router.push('/Login')
     }
+    console.log(user)
     if (user.usertype !== 'admin') {
       alert('You are not admin!')
-      this.$router.push('/Admin')
+      this.$router.push('/')
     }
     this.getBooks()
   },
   methods: {
     handleSubmit () {
       console.log(this.book)
+      if (this.book.name.length === 0) {
+        alert('Please input the Name!')
+        return
+      }
+      if (this.book.author.length === 0) {
+        alert('Please input the Author!')
+        return
+      }
+      if (this.book.publisher.length === 0) {
+        alert('Please input the Publisher!')
+        return
+      }
+      if (this.book.category.length === 0) {
+        alert('Please input the Category!')
+        return
+      }
       BookService.addBook(this.book)
         .then(response => {
           console.log(response)
@@ -179,6 +196,22 @@ export default {
     },
     handleUpdateSubmit () {
       console.log(this.update_book)
+      if (this.update_book.name.length === 0) {
+        alert('Please input the Name!')
+        return
+      }
+      if (this.update_book.author.length === 0) {
+        alert('Please input the Author!')
+        return
+      }
+      if (this.update_book.publisher.length === 0) {
+        alert('Please input the Publisher!')
+        return
+      }
+      if (this.update_book.category.length === 0) {
+        alert('Please input the Category!')
+        return
+      }
       BookService.updateBook(this.update_book)
         .then(response => {
           console.log(response)

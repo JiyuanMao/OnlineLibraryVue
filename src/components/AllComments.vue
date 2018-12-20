@@ -80,7 +80,7 @@ export default {
       }
       comment.text = text
       CommentService.updateComment(comment).then(response => {
-        alert('Update Success!')
+        alert('Update Successfully!')
       })
     },
     deleteComment (comment) {

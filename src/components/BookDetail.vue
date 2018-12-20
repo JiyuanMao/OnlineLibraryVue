@@ -77,7 +77,7 @@ export default {
       comment.bookname = this.book.name
       let that = this
       CommentService.newComment(comment).then(response => {
-        alert('Add comments success!')
+        alert('Add comments successfully!')
         that.getBookComments(comment.bookname)
       })
     },

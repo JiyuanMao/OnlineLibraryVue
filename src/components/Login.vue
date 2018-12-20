@@ -51,82 +51,82 @@
 </template>
 
 <script>
-import UserService from '@/services/userservice'
+    import UserService from '@/services/UserService'
 
-export default {
-  name: 'Login',
-  data () {
-    return {
-      form: {
-        username: '',
-        password: ''
-      },
-      show: true,
-      is_login: localStorage.getItem('user')
-    }
-  },
-  methods: {
-    onLogin (evt) {
-      evt.preventDefault()
-      UserService.userLogin(this.form)
-        .then(response => {
-          console.log(response)
-          localStorage.setItem('user', JSON.stringify(response.data[0]))
-          alert('Login Success!')
-          location.reload()
-          this.$router.push('/')
-        })
-    },
-    onReset (evt) {
-      evt.preventDefault()
-      /* Reset our form values */
-      this.form.username = ''
-      this.form.password = ''
-      this.$nextTick(() => {
-        this.show = true
-      })
-    },
-    onRegister (evt) {
-      evt.preventDefault()
-      UserService.userRegister(this.form)
-        .then(response => {
-          alert(response.data.message + ', you can login now.')
-        })
-    },
-    onSignIn (googleUser) {
-      // Useful data for your client-side scripts:
-      var profile = googleUser.getBasicProfile()
-      console.log('ID: ' + profile.getId()) // Don't send this directly to your server!
-      console.log('Full Name: ' + profile.getName())
-      console.log('Given Name: ' + profile.getGivenName())
-      console.log('Family Name: ' + profile.getFamilyName())
-      console.log('Image URL: ' + profile.getImageUrl())
-      console.log('Email: ' + profile.getEmail())
+    export default {
+        name: 'Login',
+        data() {
+            return {
+                form: {
+                    username: '',
+                    password: ''
+                },
+                show: true,
+                is_login: localStorage.getItem('user')
+            }
+        },
+        methods: {
+            onLogin(evt) {
+                evt.preventDefault()
+                UserService.userLogin(this.form)
+                    .then(response => {
+                        console.log(response)
+                        localStorage.setItem('user', JSON.stringify(response.data[0]))
+                        alert('Login Success!')
+                        location.reload()
+                        this.$router.push('/AllBooks')
+                    })
+            },
+            onReset(evt) {
+                evt.preventDefault()
+                /* Reset our form values */
+                this.form.username = ''
+                this.form.password = ''
+                this.$nextTick(() => {
+                    this.show = true
+                })
+            },
+            onRegister(evt) {
+                evt.preventDefault()
+                UserService.userRegister(this.form)
+                    .then(response => {
+                        alert(response.data.message + ', you can login now.')
+                    })
+            },
+            onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
 
-      // The ID token you need to pass to your backend:
-      let id_token = googleUser.getAuthResponse().id_token
-      console.log('ID Token: ' + id_token)
-      let user = {
-        username: profile.getName(),
-        password: '',
-        usertype: 'user'
-      }
-      localStorage.setItem('user', JSON.stringify(user))
-      alert('Login Success!')
-      location.reload()
-      this.$router.push('/AllBooks')
+                // The ID token you need to pass to your backend:
+                let id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
+                let user = {
+                    username: profile.getGivenName(),
+                    password: "",
+                    usertype: "user"
+                };
+                localStorage.setItem("user", JSON.stringify(user));
+                alert('Login Success!');
+                location.reload();
+                this.$router.push('/AllBooks');
+            }
+        }, mounted() {
+            let that = this;
+            setTimeout(function () {
+                gapi.signin2.render('google-signin-button', {
+                    longtitle: true,
+                    onsuccess: that.onSignIn
+                });
+                console.log("aaa");
+            }, 500)
+        }
     }
-  },
-  mounted () {
-    let that = this
-    setTimeout(function () {
-      gapi.signin2.render('google-signin-button', {
-        onsuccess: that.onSignIn
-      })
-      console.log('aaa')
-    }, 500)
-  }
-}
 </script>
 
 <style scoped>
